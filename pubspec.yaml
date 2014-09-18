@@ -1,0 +1,6 @@
+name: persona
+version: 0.0.1
+author: Paul VanKeuren
+description: Client/Server library for the persona login system
+dev_dependencies:
+  browser: any
