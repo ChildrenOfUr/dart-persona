@@ -1,7 +1,5 @@
 library persona;
 import 'dart:js';
-import 'dart:async';
-import 'dart:html';
 
 class Persona {
   String email;
@@ -13,11 +11,13 @@ class Persona {
    * When the user logs in or out the corresponding function will be called,
    * allowing you to update your UI.
    * 
+   * loggedIn will automatically call if the player has logged in previously,
+   * loggedOut will automatically call if the player has logged out previously.
+   * 
    */
   Persona(email, Function loggedIn, Function loggedOut) {
     JsObject watchData = new JsObject.jsify({
       'loggedInUser': email,
-      // Verifies the assertion before calling the provided 'login' function.
       'onlogin': loggedIn,
       'onlogout': loggedOut
     });
@@ -25,14 +25,12 @@ class Persona {
     _navigatorID.callMethod('watch', [watchData]);
   }
 
-  /// Call when the user wants to login, will be
-  /// called automatically on load if they still are.
+  /// Call when the user wants to login.
   request() {
     _navigatorID.callMethod('request');
   }
 
-  /// Call when the user wants to logout, will be
-  /// called automatically on load if they are not.
+  /// Call when the user wants to logout.
   logout() {
     _navigatorID.callMethod('logout');
   }
