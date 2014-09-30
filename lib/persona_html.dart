@@ -1,5 +1,7 @@
 library persona;
 import 'dart:js';
+import 'dart:async';
+import 'dart:html';
 
 class Persona {
   String email;
@@ -12,12 +14,12 @@ class Persona {
    * allowing you to update your UI.
    * 
    */
-  Persona(email, Function login, Function logout) {
+  Persona(email, Function loggedIn, Function loggedOut) {
     JsObject watchData = new JsObject.jsify({
       'loggedInUser': email,
       // Verifies the assertion before calling the provided 'login' function.
-      'onlogin': (assertion) => _verifyAssertion(assertion, login),
-      'onlogout': logout
+      'onlogin': loggedIn,
+      'onlogout': loggedOut
     });
     // Give our JsObject to the Persona API
     _navigatorID.callMethod('watch', [watchData]);
@@ -33,10 +35,5 @@ class Persona {
   /// called automatically on load if they are not.
   logout() {
     _navigatorID.callMethod('logout');
-  }
-
-  // 
-  _verifyAssertion(assertion, Function login) {
-
   }
 }
