@@ -3,9 +3,9 @@ import 'dart:html';
 import 'package:persona/persona_html.dart';
 
 main(){
-	Persona nav = new Persona('paul.vankeuren@gmail.com',report,out);
+	Persona nav = new Persona('bob.vankeuren@gmail.com',report,out);
   querySelector('#login').onClick.listen((_){
-    nav.request();
+    nav.request({'backgroundColor': '#24ccff', 'siteName': 'Pizza Paul'});
     });
   querySelector('#logout').onClick.listen((_){
     nav.logout();

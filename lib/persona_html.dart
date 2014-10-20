@@ -26,8 +26,11 @@ class Persona {
   }
 
   /// Call when the user wants to login.
-  request() {
-    _navigatorID.callMethod('request');
+  request([Map customData]) {
+    if (customData != null)
+      _navigatorID.callMethod('request',[new JsObject.jsify(customData)]);
+    else
+      _navigatorID.callMethod('request');
   }
 
   /// Call when the user wants to logout.
